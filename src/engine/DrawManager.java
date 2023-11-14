@@ -589,9 +589,13 @@ public final class DrawManager {
 			backBufferGraphics.setColor(scoreColor(800));
 			backBufferGraphics.drawString(" Z...z..    ( _ . _ )", screen.getWidth() - 250, 25);
 		}
-		if (score >= 800 && score < 1600) {
+		if (score >= 800 && score < 1200) {
 			backBufferGraphics.setColor(scoreColor(800));
-			backBufferGraphics.drawString(" Z...z..    ( ^ . ^ )", screen.getWidth() - 250, 25);
+			backBufferGraphics.drawString(" Z.z....    ( - . - )", screen.getWidth() - 250, 25);
+		}
+		if (score >= 1200 && score < 1600) {
+			backBufferGraphics.setColor(scoreColor(800));
+			backBufferGraphics.drawString(" **..*..    ( ^ . ^ )", screen.getWidth() - 250, 25);
 		}
 		if (score >= 1600 && score < 2000) {
 			backBufferGraphics.setColor(scoreColor(1600));
