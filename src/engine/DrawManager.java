@@ -574,6 +574,7 @@ public final class DrawManager {
 
 	/**
 	 * The emoji changes slightly depending on the score.
+	 * Each time the point increases by 400, the emoji effect changes.
 	 * [Clean Code Team] This method was created by highlees.
 	 *
 	 * @param screen
