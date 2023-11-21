@@ -1,5 +1,7 @@
 package entity;
 
+import engine.DrawManager;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,16 +28,27 @@ public class ItemPool {
         Item item;
         if (!pool.isEmpty()) {
             item = pool.iterator().next();
+           /* System.out.println("In getItem, print ItemPool : ");
+            for(Item i : pool)
+                System.out.println(i.spriteType.toString());
+            System.out.println("In getItem, print " + item.getSpriteType().toString()+ " in ItemPool(iterator.next)");*/
             pool.remove(item);
+            /*System.out.println("In getItem, print removed ItemPool : ");
+            for(Item i : pool)
+                System.out.println(i.spriteType.toString()); */
             item.setPositionX(positionX - item.getWidth() / 2);
             item.setPositionY(positionY);
             item.setSprite();
+            //System.out.println("After setSpritem, item is " + item.spriteType.toString());
             item.CoolReset();
             item.setDestroy(false);
         } else {
+//            System.out.println("pool is empty");
             item = new Item(positionX, positionY);
             item.setPositionX(positionX - item.getWidth() / 2);
         }
+        if(item.spriteType == DrawManager.SpriteType.ItemDestroyed) item.setSprite();
+        //System.out.println("return Item " + item.spriteType.toString());
         return item;
     }
 

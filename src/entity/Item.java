@@ -25,6 +25,8 @@ public class Item extends Entity {
 
     private boolean isdetroyed;
 
+    public Cooldown destructionCooldown;
+    public SpriteType temp;
     /**
      * Constructor, establishes the Item's properties.
      * and Set sprite dot image which can find what Item it ts.
@@ -39,6 +41,7 @@ public class Item extends Entity {
         item_dy = Math.random() > 0.5 ? 1 : -1;
         this.setSprite();
         isdetroyed = false;
+        this.destructionCooldown = Core.getCooldown(500);
     }
 
     /**
@@ -105,9 +108,25 @@ public class Item extends Entity {
     }
 
     public final void setDestroy(boolean t) {
+        temp = this.spriteType;
+        this.spriteType = SpriteType.ItemDestroyed;
+        destructionCooldown.reset();
         this.isdetroyed = t;
     }
 
+
+    /**
+     * Checks if the ship is destroyed.
+     *
+     * @return True if the ship is currently destroyed.
+     */
+    public final boolean destroyCooldown() {
+        if (this.destructionCooldown.checkFinished()) {
+            this.spriteType = temp;
+            return false;
+        }
+        return true;
+    }
 
     /**
      * when reuse item, reset livingTime.

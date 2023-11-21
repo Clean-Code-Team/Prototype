@@ -306,7 +306,13 @@ public class EnemyShip extends Entity {
 				|| (Math.random() < DROP_ITEM_PROB + (0.1 * 2 * (this.getSpriteType() == SpriteType.EnemyShipSpecial3 ? 1 : 0)))
 				|| (Math.random() < DROP_ITEM_PROB + (0.1 * 2 * (this.getSpriteType() == SpriteType.EnemyShipSpecial4 ? 1 : 0))))
 		{
-			items.add(ItemPool.getItem(this.positionX, this.positionY));
+			Item item = ItemPool.getItem(this.positionX, this.positionY);
+			//System.out.println("So, item is " + item.spriteType.toString());
+			items.add(item);
+			/*System.out.println("Items is..");
+			for (Item i : items)
+				System.out.println(item.spriteType.toString()); */
+
 		}
 	}
 
