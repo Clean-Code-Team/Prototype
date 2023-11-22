@@ -2666,20 +2666,37 @@ if (option == 35)
 			System.out.println(lives_1p);
 			System.out.println(lives_2p);
 			if(timer){
-				if(System.currentTimeMillis() - ghostTImer < 1000)
-					this.drawEntity(SpriteType.Ghost, ghostPostionX--, ghostPostionY--, 2, 2, Color.white);
-				else if (System.currentTimeMillis() - ghostTImer < 2000)
-					this.drawEntity(SpriteType.Ghost, ghostPostionX++, ghostPostionY--, 2, 2, Color.white);
-				else
-					this.drawEntity(SpriteType.Ghost, ghostPostionX--, ghostPostionY--, 2, 2, Color.white);
+				if(System.currentTimeMillis() - ghostTImer < 1000){
+					this.drawEntity(SpriteType.Ghost, ghost1PostionX--, ghost1PostionY--, 2, 2, Color.white);
+					this.drawEntity(SpriteType.Ghost, ghost2PostionX--, ghost2PostionY--, 2, 2, Color.white);
+				}
+				else if (System.currentTimeMillis() - ghostTImer < 2000){
+					this.drawEntity(SpriteType.Ghost, ghost1PostionX++, ghost1PostionY--, 2, 2, Color.white);
+					this.drawEntity(SpriteType.Ghost, ghost2PostionX++, ghost2PostionY--, 2, 2, Color.white);
+
+				}
+				else{
+					this.drawEntity(SpriteType.Ghost, ghost1PostionX--, ghost1PostionY--, 2, 2, Color.white);
+					this.drawEntity(SpriteType.Ghost, ghost2PostionX--, ghost2PostionY--, 2, 2, Color.white);
+
+				}
 			}
 			else {
-				if(System.currentTimeMillis() - ghostTImer < 1000)
-					this.drawEntity(SpriteType.Ghost, ghostPostionX, ghostPostionY, 2, 2, Color.white);
-				else if (System.currentTimeMillis() - ghostTImer < 2000)
-					this.drawEntity(SpriteType.Ghost, ghostPostionX, ghostPostionY, 2, 2, Color.white);
-				else
-					this.drawEntity(SpriteType.Ghost, ghostPostionX, ghostPostionY, 2, 2, Color.white);
+				if(System.currentTimeMillis() - ghostTImer < 1000){
+					this.drawEntity(SpriteType.Ghost, ghost1PostionX, ghost1PostionY, 2, 2, Color.white);
+					this.drawEntity(SpriteType.Ghost, ghost2PostionX, ghost2PostionY, 2, 2, Color.white);
+
+				}
+				else if (System.currentTimeMillis() - ghostTImer < 2000){
+					this.drawEntity(SpriteType.Ghost, ghost1PostionX, ghost1PostionY, 2, 2, Color.white);
+					this.drawEntity(SpriteType.Ghost, ghost2PostionX, ghost2PostionY, 2, 2, Color.white);
+
+				}
+				else{
+					this.drawEntity(SpriteType.Ghost, ghost1PostionX, ghost1PostionY, 2, 2, Color.white);
+					this.drawEntity(SpriteType.Ghost, ghost2PostionX, ghost2PostionY, 2, 2, Color.white);
+
+				}
 			}
 		}
 	}
