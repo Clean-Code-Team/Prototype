@@ -26,7 +26,7 @@ public class Item extends Entity {
     private boolean isdetroyed;
 
     public Cooldown destructionCooldown;
-    public SpriteType temp;
+    public SpriteType prev;
     /**
      * Constructor, establishes the Item's properties.
      * and Set sprite dot image which can find what Item it ts.
@@ -108,7 +108,7 @@ public class Item extends Entity {
     }
 
     public final void setDestroy(boolean t) {
-        temp = this.spriteType;
+        prev = this.spriteType;
         this.spriteType = SpriteType.ItemDestroyed;
         destructionCooldown.reset();
         this.isdetroyed = t;
@@ -122,7 +122,7 @@ public class Item extends Entity {
      */
     public final boolean destroyCooldown() {
         if (this.destructionCooldown.checkFinished()) {
-            this.spriteType = temp;
+            this.spriteType = prev;
             return false;
         }
         return true;
