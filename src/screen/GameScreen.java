@@ -769,21 +769,20 @@ public class GameScreen extends Screen {
 		}
 		for (Item item : this.items){
 			if (checkCollision(item, this.ship) && !this.levelFinished) {
-			/* version 1.0 pause effect when player eat item. */
-			/*if(checkCollision(item, this.ship) && !this.levelFinished){
-				recyclableItem.add(item);
-				this.logger.info("Get Item ");
-
-				Thread thread = new Thread();
-				thread.start();
-				try{
-					for(int i=0;i<3;i++){
-						Thread.sleep(300);
-					}
-				} catch(Exception e){
-					e.printStackTrace();
-				}
-				 */
+				/* version 1.0 pause effect when player eat item. */
+					/*if(checkCollision(item, this.ship) && !this.levelFinished){
+						recyclableItem.add(item);
+						this.logger.info("Get Item ");
+						Thread thread = new Thread();
+						thread.start();
+						try{
+							for(int i=0;i<3;i++){
+								Thread.sleep(300);
+							}
+						} catch(Exception e){
+							e.printStackTrace();
+						}
+						 */
 				//* settings of coins randomly got when killing monsters
 				ArrayList<Integer> coinProbability = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 1, 1, 1, 2, 3, 4));
 				Random random = new Random();
@@ -802,12 +801,13 @@ public class GameScreen extends Screen {
 				/* version 2.0 : when item is destroyed, show effect */
 				if (!item.isDestroyed()) {
 					this.ship.checkGetItem(item);
+					item.destructionCooldown.reset();
 					this.logger.info("Get Item ");
 				}
-				if (!item.destroyCooldown()){
-					//System.out.println("In manageCollision, add " + item.getSpriteType().toString()+ " in recyclableItem");
-					recyclableItem.add(item);
-				}
+			}
+			if (item.isDestroyed() && item.destructionCooldown.checkFinished()){
+				recyclableItem.add(item);
+				System.out.println("recycable");
 			}
 		}
 		for (Bullet bullet : recyclableBullet) {
@@ -817,10 +817,6 @@ public class GameScreen extends Screen {
 		}
 		this.items.removeAll(recyclableItem);
 		this.bullets.removeAll(recyclableBullet);
-		/*for (Item item : recyclableItem) {
-			System.out.println("In manageCollision, print recycalbe Item ");
-			System.out.println(item.getSpriteType().toString());
-		} */
 		ItemPool.recycle(recyclableItem);
 		BulletPool.recycle(recyclableBullet);
 	}

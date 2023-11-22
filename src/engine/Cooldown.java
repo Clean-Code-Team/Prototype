@@ -57,7 +57,6 @@ public class Cooldown {
 			return true;
 		return false;
 	}
-
 	/**
 	 * Restarts the cooldown.
 	 */
