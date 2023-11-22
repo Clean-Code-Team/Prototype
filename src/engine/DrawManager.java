@@ -2612,69 +2612,149 @@ if (option == 35)
 		}
 	}
 
+	private Color fadedWhite = new Color(255,255,255, 100);
+	private void drawAfterEffect(boolean movingRight){
+		int xPos;
+		if (movingRight)  xPos = ghostPostionX - 2;
+		else xPos = ghostPostionX + 2;
+		this.drawEntity(SpriteType.Ghost, xPos, ghostPostionY+10, 2, 2, fadedWhite);
+	}
+
 	public void drawGhost(boolean levelFinished, double lives){
 		if(levelFinished && lives == 0) {
 			boolean timer = (System.currentTimeMillis() - ghostTImer) % 2 == 0;
 			System.out.println(ghostColor);
 			if(timer){
-				if(System.currentTimeMillis() - ghostTImer < 1000)
+				if(System.currentTimeMillis() - ghostTImer < 1000) {
+					drawAfterEffect(false);
 					this.drawEntity(SpriteType.Ghost, ghostPostionX--, ghostPostionY--, 2, 2, Color.white);
-				else if (System.currentTimeMillis() - ghostTImer < 2000)
+				}
+				else if (System.currentTimeMillis() - ghostTImer < 2000) {
+					drawAfterEffect(true);
 					this.drawEntity(SpriteType.Ghost, ghostPostionX++, ghostPostionY--, 2, 2, Color.white);
-				else
+				}
+				else {
+					drawAfterEffect(false);
 					this.drawEntity(SpriteType.Ghost, ghostPostionX--, ghostPostionY--, 2, 2, Color.white);
+					}
 			}
 			else {
-				if(System.currentTimeMillis() - ghostTImer < 1000)
-					this.drawEntity(SpriteType.Ghost, ghostPostionX, ghostPostionY, 2, 2, Color.white);
-				else if (System.currentTimeMillis() - ghostTImer < 2000)
-					this.drawEntity(SpriteType.Ghost, ghostPostionX, ghostPostionY, 2, 2, Color.white);
-				else
-					this.drawEntity(SpriteType.Ghost, ghostPostionX, ghostPostionY, 2, 2, Color.white);
+				if(System.currentTimeMillis() - ghostTImer < 1000){
+					drawAfterEffect(false);
+					this.drawEntity(SpriteType.Ghost, ghostPostionX, ghostPostionY, 2, 2, Color.white);}
+				else if (System.currentTimeMillis() - ghostTImer < 2000) {
+					drawAfterEffect(true);
+					this.drawEntity(SpriteType.Ghost, ghostPostionX, ghostPostionY, 2, 2, Color.white);}
+				else {
+					drawAfterEffect(false);
+					this.drawEntity(SpriteType.Ghost, ghostPostionX, ghostPostionY, 2, 2, Color.white);}
 			}
 		}
 	}
+
+	private Long ghostAITimer = null;
+	private int tmp =0;
+	private int[] increments = {0,0,0,0,0};
+	private int[] adds = {1, 1, 1, 1, 1};
 	public void drawGhost_2p(boolean levelFinished, double lives_1p, double lives_2p){
 		if(levelFinished && lives_1p <= 0 && lives_2p <=0) {
-			boolean timer = (System.currentTimeMillis() - ghostTImer) % 2 == 0;
-			System.out.println(ghostColor);
-			System.out.println(lives_1p);
-			System.out.println(lives_2p);
-			if(timer){
-				if(System.currentTimeMillis() - ghostTImer < 1000){
-					this.drawEntity(SpriteType.Ghost, ghost1PostionX--, ghost1PostionY--, 2, 2, Color.white);
-					this.drawEntity(SpriteType.Ghost, ghost2PostionX--, ghost2PostionY--, 2, 2, Color.white);
+			long passedTime = System.currentTimeMillis() - ghostTImer;
+			boolean timePassedisEven = passedTime % 2 == 0;
+			if(timePassedisEven){
+				for (int i = 0; i < increments.length; i++){
+					if (System.currentTimeMillis() - ghostTImer > 100 * i) {
+						this.drawEntity(SpriteType.Ghost, ghost1PostionX+increments[i] + i * 4, ghost1PostionY + i *4, 2, 2, new Color(255,255,255,255 - i * 30));
+						this.drawEntity(SpriteType.Ghost, ghost2PostionX+increments[i]+ i *4, ghost2PostionY+ i *4, 2, 2, new Color(255,255,255,255 - i * 30));
+						if (increments[i] <= -15 || increments[i] >= 15) adds[i] *= -1;
+						increments[i] += adds[i];
+					}
 				}
-				else if (System.currentTimeMillis() - ghostTImer < 2000){
-					this.drawEntity(SpriteType.Ghost, ghost1PostionX++, ghost1PostionY--, 2, 2, Color.white);
-					this.drawEntity(SpriteType.Ghost, ghost2PostionX++, ghost2PostionY--, 2, 2, Color.white);
-
-				}
-				else{
-					this.drawEntity(SpriteType.Ghost, ghost1PostionX--, ghost1PostionY--, 2, 2, Color.white);
-					this.drawEntity(SpriteType.Ghost, ghost2PostionX--, ghost2PostionY--, 2, 2, Color.white);
-
-				}
+				ghost1PostionY--; ghost2PostionY--;
 			}
 			else {
-				if(System.currentTimeMillis() - ghostTImer < 1000){
-					this.drawEntity(SpriteType.Ghost, ghost1PostionX, ghost1PostionY, 2, 2, Color.white);
-					this.drawEntity(SpriteType.Ghost, ghost2PostionX, ghost2PostionY, 2, 2, Color.white);
-
-				}
-				else if (System.currentTimeMillis() - ghostTImer < 2000){
-					this.drawEntity(SpriteType.Ghost, ghost1PostionX, ghost1PostionY, 2, 2, Color.white);
-					this.drawEntity(SpriteType.Ghost, ghost2PostionX, ghost2PostionY, 2, 2, Color.white);
-
-				}
-				else{
-					this.drawEntity(SpriteType.Ghost, ghost1PostionX, ghost1PostionY, 2, 2, Color.white);
-					this.drawEntity(SpriteType.Ghost, ghost2PostionX, ghost2PostionY, 2, 2, Color.white);
-
+				for (int i = 0; i < increments.length; i++) {
+					if (System.currentTimeMillis() - ghostTImer > 100 * i) {
+						this.drawEntity(SpriteType.Ghost, ghost1PostionX+increments[i] + i * 4, ghost1PostionY + i *4, 2, 2, new Color(255,255,255,255 - i * 30));
+						this.drawEntity(SpriteType.Ghost, ghost2PostionX+increments[i]+ i * 4, ghost2PostionY+ i *4, 2, 2, new Color(255,255,255,255 - i * 30));
+					}
 				}
 			}
+//			this.drawEntity(SpriteType.Ghost, ghost1PostionX+tmp, ghost1PostionY, 2, 2, Color.white);
+//			this.drawEntity(SpriteType.Ghost, ghost2PostionX+tmp, ghost2PostionY, 2, 2, Color.white);
+//
+//			if (System.currentTimeMillis() - ghostTImer > 100){
+//				this.drawEntity(SpriteType.Ghost, ghost1PostionX+tmp-2, ghost1PostionY+2, 2, 2, new Color(255,255,255,200));
+//				this.drawEntity(SpriteType.Ghost, ghost2PostionX+tmp-2, ghost2PostionY+2, 2, 2, new Color(255,255,255,200));
+//			}
+//			if (System.currentTimeMillis() - ghostTImer > 200){
+//				this.drawEntity(SpriteType.Ghost, ghost1PostionX+tmp-4, ghost1PostionY+4, 2, 2, new Color(255,255,255,170));
+//				this.drawEntity(SpriteType.Ghost, ghost2PostionX+tmp-4, ghost2PostionY+4, 2, 2, new Color(255,255,255,170));
+//			}
+//			if (System.currentTimeMillis() - ghostTImer > 300){
+//				this.drawEntity(SpriteType.Ghost, ghost1PostionX+tmp-6, ghost1PostionY+6, 2, 2, new Color(255,255,255,140));
+//				this.drawEntity(SpriteType.Ghost, ghost2PostionX+tmp-6, ghost2PostionY+6, 2, 2, new Color(255,255,255,140));
+//			}
+//			if (System.currentTimeMillis() - ghostTImer > 400){
+//				this.drawEntity(SpriteType.Ghost, ghost1PostionX+tmp-8, ghost1PostionY+8, 2, 2, new Color(255,255,255,110));
+//				this.drawEntity(SpriteType.Ghost, ghost2PostionX+tmp-8, ghost2PostionY+8, 2, 2, new Color(255,255,255,110));
+//			}
+//			if (System.currentTimeMillis() - ghostTImer > 500){
+//				this.drawEntity(SpriteType.Ghost, ghost1PostionX+tmp-10, ghost1PostionY+10, 2, 2, new Color(255,255,255,80));
+//				this.drawEntity(SpriteType.Ghost, ghost2PostionX+tmp-10, ghost2PostionY+10, 2, 2, new Color(255,255,255,80));
+//			}
+
+			// Draw ghost after images
+//			if (ghostAITimer == null && System.currentTimeMillis() - ghostTImer > 500) {
+//				ghostAITimer = System.currentTimeMillis();
+//			}
+//			ghostAITimer = ghostTImer+500;
+//			if (ghostAITimer >= 0) {
+//				if (timePassedisEven) {
+//					if (System.currentTimeMillis() - ghostAITimer < 1000) afterImagetmp--;
+//					else if (System.currentTimeMillis() - ghostAITimer < 2000) afterImagetmp++;
+//					else afterImagetmp--;
+//				}
+//				this.drawEntity(SpriteType.Ghost, ghost1PostionX+afterImagetmp, ghost1PostionY+20, 2, 2, Color.blue);
+//				this.drawEntity(SpriteType.Ghost, ghost2PostionX+afterImagetmp, ghost2PostionY+20, 2, 2, Color.blue);
+//				for (int i = 0; i < 3; i++) {
+//					this.drawEntity(SpriteType.Ghost, ghost1PostionX + afterImagetmp, ghost1PostionY + (i + 1) * 10, 2, 2, Color.blue);
+//					this.drawEntity(SpriteType.Ghost, ghost2PostionX + afterImagetmp, ghost2PostionY + (i + 1) * 10, 2, 2, Color.blue);
+//				}
+//				if (System.currentTimeMillis() - ghostAITimer == 1000) System.out.println(afterImagetmp);
+//			}
+
+//			if (ghostAITimer != null) {
+//				if (timePassedisEven) {
+//					if (System.currentTimeMillis() - ghostAITimer < 1000) {
+//						afterImagetmp--;
+//					} else if (System.currentTimeMillis() - ghostAITimer < 2000) {
+//						afterImagetmp++;
+//					} else {
+//						afterImagetmp--;
+//					}
+//				}
+//				this.drawEntity(SpriteType.Ghost, ghost1PostionX + afterImagetmp, ghost1PostionY+20, 2, 2, Color.red);
+//				this.drawEntity(SpriteType.Ghost, ghost2PostionX + afterImagetmp, ghost2PostionY+20, 2, 2, Color.red);
+//			}
+//			drawGhostWithTimer(tmp, ghostTImer);
+//			if (ghostAITimer != null) drawGhostWithTimer(afterImagetmp, ghostAITimer);
+//			System.out.println("tmp = " + tmp + " afterImagetmp = " + afterImagetmp);
+
 		}
 	}
+
+//	// draw ghost animation
+//	private void drawOneGhost(int timer, int increment){
+//		long passedTime = System.currentTimeMillis() - timer;
+//		boolean timePassedisEven = (passedTime)%2==0;
+//		if (timePassedisEven){
+//			if (passedTime > 1000 && passedTime < 2000) increment++;
+//			else increment--;
+//		}
+//		this.drawEntity(SpriteType.Ghost, ghost1PostionX+increment, ghost1PostionY+increment, 2, 2, Color.white);
+//		this.drawEntity(SpriteType.Ghost, ghost2PostionX+increment, ghost2PostionY+increment, 2, 2, Color.white);
+//	}
+
 
 	/**
 	 * Creates an animation of monster.
