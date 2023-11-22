@@ -805,10 +805,8 @@ public class GameScreen extends Screen {
 					this.logger.info("Get Item ");
 				}
 			}
-			if (item.isDestroyed() && item.destructionCooldown.checkFinished()){
+			if (item.isDestroyed() && item.destructionCooldown.checkFinished())
 				recyclableItem.add(item);
-				System.out.println("recycable");
-			}
 		}
 		for (Bullet bullet : recyclableBullet) {
 			if (bullet.getSpeed() < 0 && bullet.isEffectBullet() == 0) {
