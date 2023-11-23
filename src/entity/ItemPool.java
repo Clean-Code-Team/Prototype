@@ -1,5 +1,6 @@
 package entity;
 
+import engine.DrawManager;
 import java.util.HashSet;
 import java.util.Set;
 

@@ -233,7 +233,8 @@ public final class DrawManager {
 		EnhanceStone,
 		//ShipCShileded,
 		gravestone,
-		Ghost;
+		Ghost,
+		ItemDestroyed;
 	};
 
 
@@ -335,6 +336,7 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.Explosion4, new boolean[10][10]);
 			spriteMap.put(SpriteType.gravestone, new boolean[13][9]);
 			spriteMap.put(SpriteType.Ghost, new boolean[9][11]);
+			spriteMap.put(SpriteType.ItemDestroyed, new boolean[7][8]);
 			fileManager.loadSprite(spriteMap);
 			logger.info("Finished loading the sprites.");
 

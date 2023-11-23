@@ -30,6 +30,7 @@ public class Ship extends Entity {
 	public Cooldown shootingCooldown;
 	/** Time spent inactive between hits. */
 	public Cooldown destructionCooldown;
+
 	/** EveryThing of item effect. */
 	private ShipEffect shipEffect;
 
