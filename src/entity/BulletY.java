@@ -13,7 +13,7 @@ import engine.DrawManager.SpriteType;
  *
  */
 public class BulletY extends Entity {
-
+    Color[] colors = {Color.WHITE, Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.ORANGE, Color.PINK, Color.LIGHT_GRAY};
     /**
      * Speed of the bullet, positive or negative depending on direction -
      * positive is down.
@@ -36,7 +36,7 @@ public class BulletY extends Entity {
      *            direction - positive is down.
      */
     public BulletY(final int positionX, final int positionY, final int speed, final int attackDamage) {
-        super(positionX, positionY, 5*2 , 7*2 , Color.YELLOW);
+        super(positionX, positionY, 3*2 , 5*2 , Color.WHITE);
         this.speed = speed;
         this.damage = 3 + attackDamage;
         setSprite();
@@ -46,10 +46,18 @@ public class BulletY extends Entity {
      * Sets correct sprite for the bullet, based on speed.
      */
     public final void setSprite() {
-        if (speed < 0)
+        if (speed < 0) {
+            /*
+                To apply the same color when an item is picked up.
+             */
+            Color nowColor = colors[(int) ((Math.random() * (7 - 1)) + 1)];
             this.spriteType = SpriteType.BulletY;
-        else
+            this.setColor(nowColor);
+        }
+        else {
             this.spriteType = SpriteType.EnemyBullet;
+            this.setColor(Color.WHITE);
+        }
     }
 
     /**
