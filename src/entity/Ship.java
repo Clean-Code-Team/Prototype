@@ -22,7 +22,7 @@ public class Ship extends Entity {
 	/** Speed of the bullets shot by the ship. */
 	public static final int BULLET_SPEED = -6;
 	/** Speed of the bullets shot by the ship. */
-	public static final int BULLETY_SPEED = -9;
+	public static final int BULLETY_SPEED = -10;
 	/** Movement of the ship for each unit of time. */
 	private static final int SPEED = 2;
 
