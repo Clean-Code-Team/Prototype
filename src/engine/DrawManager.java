@@ -233,7 +233,8 @@ public final class DrawManager {
 		EnhanceStone,
 		//ShipCShileded,
 		gravestone,
-		Ghost;
+		Ghost,
+		ItemDestroyed;
 	};
 
 
@@ -264,7 +265,7 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.ShipFDestroyed, new boolean[13][8]);
 			spriteMap.put(SpriteType.ShipGDestroyed, new boolean[13][8]);
 			spriteMap.put(SpriteType.Bullet, new boolean[3][5]);
-			spriteMap.put(SpriteType.BulletY, new boolean[5][7]);
+			spriteMap.put(SpriteType.BulletY, new boolean[3][5]);
 			spriteMap.put(SpriteType.EnemyBullet, new boolean[3][5]);
 			spriteMap.put(SpriteType.EnemyBulletLeft, new boolean[3][5]);
 			spriteMap.put(SpriteType.EnemyBulletRight, new boolean[3][5]);
@@ -335,6 +336,7 @@ public final class DrawManager {
 			spriteMap.put(SpriteType.Explosion4, new boolean[10][10]);
 			spriteMap.put(SpriteType.gravestone, new boolean[13][9]);
 			spriteMap.put(SpriteType.Ghost, new boolean[9][11]);
+			spriteMap.put(SpriteType.ItemDestroyed, new boolean[7][8]);
 			fileManager.loadSprite(spriteMap);
 			logger.info("Finished loading the sprites.");
 
@@ -574,6 +576,7 @@ public final class DrawManager {
 
 	/**
 	 * The emoji changes slightly depending on the score.
+	 * Each time the point increases by 400, the emoji effect changes.
 	 * [Clean Code Team] This method was created by highlees.
 	 *
 	 * @param screen
@@ -584,25 +587,49 @@ public final class DrawManager {
 
 	public void scoreEmoji(final Screen screen, final int score) {
 		backBufferGraphics.setFont(fontRegular);
-		if (score >= 800 && score < 1600) {
+		if (score >= 400 && score < 800) {
 			backBufferGraphics.setColor(scoreColor(800));
 			backBufferGraphics.drawString(" Z...z..    ( _ . _ )", screen.getWidth() - 250, 25);
 		}
-		if (score >= 1600 && score < 2400) {
-			backBufferGraphics.setColor(scoreColor(1600));
-			backBufferGraphics.drawString("  ??...?..    ( o . o )", screen.getWidth() - 240, 25);
+		if (score >= 800 && score < 1200) {
+			backBufferGraphics.setColor(scoreColor(800));
+			backBufferGraphics.drawString(" Z.z....    ( - . - )", screen.getWidth() - 250, 25);
 		}
-		if (score >= 2400 && score < 3200) {
+		if (score >= 1200 && score < 1600) {
+			backBufferGraphics.setColor(scoreColor(800));
+			backBufferGraphics.drawString(" **..*..    ( ^ . ^ )", screen.getWidth() - 250, 25);
+		}
+		if (score >= 1600 && score < 2000) {
+			backBufferGraphics.setColor(scoreColor(1600));
+			backBufferGraphics.drawString("  ??...?..    ( * . * )", screen.getWidth() - 240, 25);
+		}
+		if (score >= 2000 && score < 2400) {
+			backBufferGraphics.setColor(scoreColor(1600));
+			backBufferGraphics.drawString("  ?!...?..    ( o . o )", screen.getWidth() - 240, 25);
+		}
+		if (score >= 2400 && score < 2800) {
 			backBufferGraphics.setColor(scoreColor(2400));
 			backBufferGraphics.drawString("         !!...!..  ) O . O )", screen.getWidth() - 240, 25);
 		}
-		if (score >= 3200 && score < 4000) {
-			backBufferGraphics.setColor(scoreColor(3200));
-			backBufferGraphics.drawString("            (_/ 0 ^ 0 )_/", screen.getWidth() - 250, 25);
+		if (score >= 2800 && score < 3200) {
+			backBufferGraphics.setColor(scoreColor(2400));
+			backBufferGraphics.drawString("         ##...#..  ) ^ . ^ )", screen.getWidth() - 240, 25);
 		}
-		if (score >= 4000 && score < 4800) {
+		if (score >= 3200 && score < 3600) {
+			backBufferGraphics.setColor(scoreColor(3200));
+			backBufferGraphics.drawString("            (_/ 0 _ 0 )_/", screen.getWidth() - 250, 25);
+		}
+		if (score >= 3600 && score < 4000) {
+			backBufferGraphics.setColor(scoreColor(3200));
+			backBufferGraphics.drawString("            (_/ # - # )_/", screen.getWidth() - 250, 25);
+		}
+		if (score >= 4000 && score < 4400) {
 			backBufferGraphics.setColor(scoreColor(4000));
-			backBufferGraphics.drawString("             \\_( 0 ^ 0 )_/", screen.getWidth() - 240, 25);
+			backBufferGraphics.drawString("             \\_( # ^ # )_/", screen.getWidth() - 240, 25);
+		}
+		if (score >= 4400 && score < 4800) {
+			backBufferGraphics.setColor(scoreColor(4000));
+			backBufferGraphics.drawString("             \\_( @ ^ @ )_/", screen.getWidth() - 240, 25);
 		}
 		if (score >= 4800) {
 			backBufferGraphics.setColor(blinkingColor("HIGH_SCORES"));

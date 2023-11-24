@@ -225,7 +225,7 @@ public class GameScreen extends Screen {
 
 		enemyShipFormation = new EnemyShipFormation(this.gameSettings, this.level);
 		enemyShipFormation.attach(this);
-		this.ship = new Ship(this.width / 2, this.height - 30, "d", this.shipColor);
+		this.ship = new Ship(this.width / 2, this.height - 30, "a", this.shipColor);
 		this.bulletLine = new BulletLine(this.width / 2 , this.height + 120);
 		// Appears each 10-30 seconds.
 		this.enemyShipSpecialCooldown = Core.getVariableCooldown(
@@ -282,7 +282,6 @@ public class GameScreen extends Screen {
 	 */
 	protected final void update() {
 		timer.update();
-
 		if (pause) { // Game Pause, press ENTER to continue or BackSpace to quit
 			pause = !inputManager.isKeyDown(KeyEvent.VK_ENTER);
 			boolean exit = inputManager.isKeyDown(KeyEvent.VK_BACK_SPACE);
@@ -675,10 +674,8 @@ public class GameScreen extends Screen {
 	private void cleanItems() {
 		Set<Item> recyclable = new HashSet<Item>();
 		for (Item item : this.items) {
-			item.update(this.getWidth(), this.getHeight(), SEPARATION_LINE_HEIGHT);
-			if (item.islivingTimeEnd()){
-				recyclable.add(item);
-			}
+			if (!item.isDestroyed()) item.update(this.getWidth(), this.getHeight(), SEPARATION_LINE_HEIGHT);
+			if (item.islivingTimeEnd())recyclable.add(item);
 		}
 		this.items.removeAll(recyclable);
 		ItemPool.recycle(recyclable);
@@ -771,10 +768,21 @@ public class GameScreen extends Screen {
 			}
 		}
 		for (Item item : this.items){
-			if(checkCollision(item, this.ship) && !this.levelFinished){
-				recyclableItem.add(item);
-				this.logger.info("Get Item ");
-
+			if (checkCollision(item, this.ship) && !this.levelFinished) {
+				/* version 1.0 pause effect when player eat item. */
+					/*if(checkCollision(item, this.ship) && !this.levelFinished){
+						recyclableItem.add(item);
+						this.logger.info("Get Item ");
+						Thread thread = new Thread();
+						thread.start();
+						try{
+							for(int i=0;i<3;i++){
+								Thread.sleep(300);
+							}
+						} catch(Exception e){
+							e.printStackTrace();
+						}
+						 */
 				//* settings of coins randomly got when killing monsters
 				ArrayList<Integer> coinProbability = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 1, 1, 1, 2, 3, 4));
 				Random random = new Random();
@@ -790,8 +798,15 @@ public class GameScreen extends Screen {
 				if(item.getSpriteType() == SpriteType.PerpleEnhanceStone){
 					this.enhanceManager.PlusNumEnhanceStoneAttack(1);
 				}
-				this.ship.checkGetItem(item);
+				/* version 2.0 : when item is destroyed, show effect */
+				if (!item.isDestroyed()) {
+					this.ship.checkGetItem(item);
+					item.destructionCooldown.reset();
+					this.logger.info("Get Item ");
+				}
 			}
+			if (item.isDestroyed() && item.destructionCooldown.checkFinished())
+				recyclableItem.add(item);
 		}
 		for (Bullet bullet : recyclableBullet) {
 			if (bullet.getSpeed() < 0 && bullet.isEffectBullet() == 0) {
