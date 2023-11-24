@@ -2639,6 +2639,7 @@ if (option == 35)
 		}
 	}
 
+	// Method that draws after image of ghost (1P)
 	private Color fadedWhite = new Color(255,255,255, 100);
 	private void drawAfterEffect(boolean movingRight){
 		int xPos;
@@ -2679,6 +2680,7 @@ if (option == 35)
 		}
 	}
 
+	// Variables for ghost animation (2P)
 	private int[] increments = {0,0,0,0,0};
 	private int[] adds = {1, 1, 1, 1, 1};
 	public void drawGhost_2p(boolean levelFinished, double lives_1p, double lives_2p){
