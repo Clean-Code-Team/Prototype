@@ -96,6 +96,9 @@ public final class DrawManager {
 	private boolean initialSound = true;
 	public boolean initialSound2 = true;
 	private boolean isAfterLoading = false;
+	/** Variables for ghost animation (2P) */
+	private int[] increments = {0,0,0,0,0};
+	private int[] adds = {1, 1, 1, 1, 1};
 
 
 
@@ -2650,39 +2653,28 @@ if (option == 35)
 
 	public void drawGhost(boolean levelFinished, double lives){
 		if(levelFinished && lives == 0) {
-			boolean timer = (System.currentTimeMillis() - ghostTImer) % 2 == 0;
-			System.out.println(ghostColor);
-			if(timer){
-				if(System.currentTimeMillis() - ghostTImer < 1000) {
-					drawAfterEffect(false);
-					this.drawEntity(SpriteType.Ghost, ghostPostionX--, ghostPostionY--, 2, 2, Color.white);
-				}
-				else if (System.currentTimeMillis() - ghostTImer < 2000) {
-					drawAfterEffect(true);
-					this.drawEntity(SpriteType.Ghost, ghostPostionX++, ghostPostionY--, 2, 2, Color.white);
-				}
-				else {
-					drawAfterEffect(false);
-					this.drawEntity(SpriteType.Ghost, ghostPostionX--, ghostPostionY--, 2, 2, Color.white);
+			long passedTime = System.currentTimeMillis() - ghostTImer;
+			boolean timePassedisEven = passedTime % 2 == 0;
+			if(timePassedisEven){
+				for (int i = 0; i < increments.length; i++){
+					if (System.currentTimeMillis() - ghostTImer > 100 * i) {
+						this.drawEntity(SpriteType.Ghost, ghostPostionX+increments[i] + i * 4, ghostPostionY + i *4, 2, 2, new Color(255,255,255,255 - i * 30));
+						if (increments[i] <= -30 || increments[i] >= 3) adds[i] *= -1;
+						increments[i] += adds[i];
 					}
+				}
+				ghostPostionY--;
 			}
 			else {
-				if(System.currentTimeMillis() - ghostTImer < 1000){
-					drawAfterEffect(false);
-					this.drawEntity(SpriteType.Ghost, ghostPostionX, ghostPostionY, 2, 2, Color.white);}
-				else if (System.currentTimeMillis() - ghostTImer < 2000) {
-					drawAfterEffect(true);
-					this.drawEntity(SpriteType.Ghost, ghostPostionX, ghostPostionY, 2, 2, Color.white);}
-				else {
-					drawAfterEffect(false);
-					this.drawEntity(SpriteType.Ghost, ghostPostionX, ghostPostionY, 2, 2, Color.white);}
+				for (int i = 0; i < increments.length; i++) {
+					if (System.currentTimeMillis() - ghostTImer > 100 * i) {
+						this.drawEntity(SpriteType.Ghost, ghostPostionX+increments[i] + i * 4, ghostPostionY + i *4, 2, 2, new Color(255,255,255,255 - i * 30));
+					}
+				}
 			}
 		}
 	}
 
-	// Variables for ghost animation (2P)
-	private int[] increments = {0,0,0,0,0};
-	private int[] adds = {1, 1, 1, 1, 1};
 	public void drawGhost_2p(boolean levelFinished, double lives_1p, double lives_2p){
 		if(levelFinished && lives_1p <= 0 && lives_2p <=0) {
 			long passedTime = System.currentTimeMillis() - ghostTImer;
