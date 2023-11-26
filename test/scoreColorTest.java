@@ -30,6 +30,16 @@ public class scoreColorTest {
             Color gray = new Color(RGB, RGB, RGB);
             return gray;
         }
+        if (color == "RANDOM") {
+			Color[] rndColors = new Color[] {new Color(130, 240, 250), 
+				new Color(130, 250, 50), new Color(100, 250, 250), 
+				new Color(150, 130, 250), new Color(180, 130, 250), 
+				new Color(135, 100, 205), new Color(130, 10, 220), 
+				new Color(240, 130, 135), new Color(220, 200, 250)};
+
+			int rndNum = (int) (Math.random() * (8 - 0 + 1));
+			return rndColors[rndNum];
+		}
         return Color.WHITE;
     }
 
@@ -82,6 +92,32 @@ public class scoreColorTest {
         if (blinkingColor("GRAY").getBlue() >= 160 ||
                 blinkingColor("GRAY").getBlue() < 100 ) { assertEquals(1, 2); }
         else { assertEquals(1, 1); }
+    }
+
+    // ------------------------------ BLINKING COLOR TEST (RANDOM)  ------------------------------ //
+
+    @Test
+    public void random_color_test() {
+
+        // Test 1000 times
+        for (int i = 0; i < 1000; i++) {
+
+            // RED
+            if (blinkingColor("RANDOM").getRed() < 100 || 
+            blinkingColor("RANDOM").getRed() > 240 ) { assertEquals(1, 2); }
+            else { assertEquals(1, 1); }
+
+            // GREEN
+            if (blinkingColor("RANDOM").getGreen() < 10 || 
+            blinkingColor("RANDOM").getGreen() > 250 ) { assertEquals(2, 3); }
+            else { assertEquals(1, 1); }
+
+            // BLUE
+            if (blinkingColor("RANDOM").getBlue() < 50 || 
+            blinkingColor("RANDOM").getBlue() > 250 ) { assertEquals(3, 4); }
+            else { assertEquals(1, 1); }
+        }
+        
     }
 
 
