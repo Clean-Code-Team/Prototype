@@ -981,6 +981,16 @@ public final class DrawManager {
 			Color gray = new Color(RGB, RGB, RGB);
 			return gray;
 		}
+		if (color == "RANDOM") {
+			Color[] rndColors = new Color[] {new Color(130, 240, 250), 
+				new Color(130, 250, 50), new Color(100, 250, 250), 
+				new Color(150, 130, 250), new Color(180, 130, 250), 
+				new Color(135, 100, 205), new Color(130, 10, 220), 
+				new Color(240, 130, 135), new Color(220, 200, 250)};
+
+			int rndNum = (int) (Math.random() * (8 - 0 + 1));
+			return rndColors[rndNum];
+		}
 		return Color.WHITE;
 	}
 
@@ -1048,7 +1058,7 @@ public final class DrawManager {
 		drawCenteredRegularString(screen, instructionsString,
 				screen.getHeight() / 2);
 
-		backBufferGraphics.setColor(blinkingColor("GREEN"));
+		backBufferGraphics.setColor(blinkingColor("RANDOM"));
 		drawCenteredBigString(screen, titleString, screen.getHeight() / 3);
 	}
 
