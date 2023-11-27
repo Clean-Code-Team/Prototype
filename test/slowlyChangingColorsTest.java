@@ -35,17 +35,14 @@ public class slowlyChangingColorsTest {
 			if (c == '8') return new Color(55, 55, 55);
 			if (c == '9') return new Color(65, 65, 65);
 		}
-		if (color == "RAINBOW") {
-			if (c == '0') return new Color(254, 254, 0);
-			if (c == '1') return new Color(135, 254, 0);
-			if (c == '2') return new Color(0, 254, 0);
-			if (c == '3') return new Color(0, 254, 254);
-			if (c == '4') return new Color(0, 135, 254);
-			if (c == '5') return new Color(0, 0, 254);
-			if (c == '6') return new Color(135, 0, 205);
-			if (c == '7') return new Color(254, 0, 224);
-			if (c == '8') return new Color(254, 0, 135);
-			if (c == '9') return new Color(220, 200, 254);
+		if (color == "RANDOM") {
+			Color[] rndColors = new Color[] {
+				new Color(240, 240, 60), new Color(140, 140, 230), 
+				new Color(45, 230, 240), new Color(45, 50, 240), 
+				new Color(240, 230, 50), new Color(120, 240, 10), 
+				new Color(230, 240, 240), new Color(240, 150, 50), 
+				new Color(150, 50, 230), new Color(230, 50, 150)};
+			return rndColors[Character.getNumericValue(c)];
 		}
 		return Color.WHITE;
 	}
@@ -61,7 +58,7 @@ public class slowlyChangingColorsTest {
 
 
 
-    // ------------------------- UNIT TESTING -------------------------
+    // ------------------------- UNIT TEST -------------------------
 
     @Test
     public void green_color_test() {
@@ -86,14 +83,13 @@ public class slowlyChangingColorsTest {
 	}
 
 	@Test
-	public void rainbow_color_test() {
-		if (slowlyChangingColors("RAINBOW").getRed() == 255 || 
-		slowlyChangingColors("RAINBOW").getGreen() == 255) {
-			assertEquals(1, 2);
-		}
-		else {
-			assertEquals(1, 1);
-		}
+	public void random_color_test() {
+		if (slowlyChangingColors("RANDOM").getRed() < 45 || 
+		slowlyChangingColors("RANDOM").getRed() > 240) { assertEquals(1, 2); }
+		if (slowlyChangingColors("RANDOM").getGreen() < 50 || 
+		slowlyChangingColors("RANDOM").getGreen() > 240) { assertEquals(1, 2); }
+		if (slowlyChangingColors("RANDOM").getBlue() < 10 || 
+		slowlyChangingColors("RANDOM").getBlue() > 240) { assertEquals(1, 2); }
 	}
 
 }
