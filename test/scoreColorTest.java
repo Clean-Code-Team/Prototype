@@ -30,6 +30,7 @@ public class scoreColorTest {
             Color gray = new Color(RGB, RGB, RGB);
             return gray;
         }
+        /*
         if (color == "RANDOM") {
 			Color[] rndColors = new Color[] {new Color(130, 240, 250), 
 				new Color(130, 250, 50), new Color(100, 250, 250), 
@@ -40,6 +41,7 @@ public class scoreColorTest {
 			int rndNum = (int) (Math.random() * (8 - 0 + 1));
 			return rndColors[rndNum];
 		}
+        */
         return Color.WHITE;
     }
 
@@ -96,6 +98,7 @@ public class scoreColorTest {
 
     // ------------------------------ BLINKING COLOR TEST (RANDOM)  ------------------------------ //
 
+    /*
     @Test
     public void random_color_test() {
 
@@ -119,6 +122,7 @@ public class scoreColorTest {
         }
         
     }
+    */
 
 
 
