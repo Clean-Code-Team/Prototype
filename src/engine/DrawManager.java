@@ -1023,7 +1023,7 @@ public final class DrawManager {
 			Color[] rndColors = new Color[] {
 				new Color(240, 240, 60), new Color(140, 140, 230), 
 				new Color(45, 230, 240), new Color(45, 50, 240), 
-				new Color(240, 230, 50), new Color(120, 240, 10), 
+				new Color(120, 240, 10), new Color(100, 60, 160), 
 				new Color(230, 240, 240), new Color(240, 150, 50), 
 				new Color(150, 50, 230), new Color(230, 50, 150)};
 			return rndColors[Character.getNumericValue(c)];
