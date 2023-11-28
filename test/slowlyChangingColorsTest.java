@@ -82,6 +82,11 @@ public class slowlyChangingColorsTest {
 		}
 	}
 
+	/**
+	 * Verify that the method returns the range of colors as intended.
+	 * [Clean Code Team] This test was created by highlees.
+	 *
+	 */
 	@Test
 	public void random_color_test() {
 		if (slowlyChangingColors("RANDOM").getRed() < 45 || 
