@@ -35,6 +35,7 @@ import entity.Entity;
 import screen.GameScreen;
 import screen.GameScreen_2P;
 import screen.Screen;
+import screen.SkinStoreScreen;
 
 
 /**
@@ -2153,10 +2154,10 @@ if (option == 35)
 		backBufferGraphics.setColor(Color.green);
 		drawCenteredBigString(screen, skinStoretxt,	screen.getHeight()/4 - 97);
 		drawHorizontalLine(screen, screen.getHeight()/14);
-		drawEntity(SpriteType.ShipA, x1, y1, 5, 5, Color.YELLOW);
-		drawEntity(SpriteType.ShipA, x2, y1, 5, 5, Color.BLUE);
-		drawEntity(SpriteType.ShipA, x1, y2, 5, 5, Color.RED);
-		drawEntity(SpriteType.ShipA, x2, y2, 5, 5, Color.CYAN);
+		drawEntity(SpriteType.ShipA, x1, y1, 5, 5, SkinStoreScreen.skinColor1);
+		drawEntity(SpriteType.ShipA, x2, y1, 5, 5, SkinStoreScreen.skinColor2);
+		drawEntity(SpriteType.ShipA, x1, y2, 5, 5, SkinStoreScreen.skinColor3);
+		drawEntity(SpriteType.ShipA, x2, y2, 5, 5, SkinStoreScreen.skinColor4);
 
 		backBufferGraphics.setFont(fontRegular);
 	backBufferGraphics.setColor(Color.yellow);
