@@ -60,7 +60,7 @@ public class SkinStoreScreen extends Screen {
          this.skinBuyManager = new SkinBuyManager(gameState);
 
      }
-
+     // upgrade new skin in skinstorescreen
      private void upgradeSkin() {
         if(score>5000){
             skinColor1 = Color.CYAN;

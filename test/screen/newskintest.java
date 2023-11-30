@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 class newskintest {
 
     @Test
+    // check upgradeskin method
+    // check only skinchange
     void upgradeSkin() {
         for (int score = 0; score < 7000; score += 200) {
             if (score > 5000)
