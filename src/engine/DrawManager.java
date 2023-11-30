@@ -1023,7 +1023,7 @@ public final class DrawManager {
 			Color[] rndColors = new Color[] {
 				new Color(240, 240, 60), new Color(140, 140, 230), 
 				new Color(45, 230, 240), new Color(45, 50, 240), 
-				new Color(120, 240, 10), new Color(100, 60, 160), 
+				new Color(120, 240, 10), new Color(100, 60, 160),
 				new Color(230, 240, 240), new Color(240, 150, 50), 
 				new Color(150, 50, 230), new Color(230, 50, 150)};
 			return rndColors[Character.getNumericValue(c)];
@@ -2724,25 +2724,34 @@ if (option == 35)
 	 * @param separationLineHeight
 	 * @param lives
 	 */
-	public void drawBackground(final Screen screen, int separationLineHeight, int lives){
+	public void drawBackground(final Screen screen, int separationLineHeight, int lives, int level){
+
 		int height = screen.getHeight();
 		int width = screen.getWidth();
 
-		if (bgTimer.checkFinished()){
-			brightness+= lighter;
-			if (brightness >= 70) lighter *= -1;
-			else if (brightness <= 0) lighter *= -1;
-			bgTimer.reset();
+		if (level == 8) {
+			backBufferGraphics.setColor(Color.black);
+			backBufferGraphics.drawRect(0, separationLineHeight, width, height);
 		}
+		else {
+			if (bgTimer.checkFinished()){
+				brightness+= lighter;
+				if (brightness >= 70) lighter *= -1;
+				else if (brightness <= 0) lighter *= -1;
+				bgTimer.reset();
+			}
 
-		Graphics2D g2 = (Graphics2D)backBufferGraphics;
-		GradientPaint gp = new GradientPaint(0, separationLineHeight, new Color(31, 0, 0, 216), 0, height, new Color(brightness,brightness/2,100+brightness/2,230));
-		g2.setPaint(gp);
-		g2.fill(new Rectangle(0, separationLineHeight, width, height));
 
-		if (lives <= 3) {
-			backBufferGraphics.setColor(new Color(10, 0,  0, 200 - (lives * 50)));
-			backBufferGraphics.fillRect(0, separationLineHeight, width, height);
+
+			Graphics2D g2 = (Graphics2D)backBufferGraphics;
+			GradientPaint gp = new GradientPaint(0, separationLineHeight, new Color(31, 0, 0, 216), 0, height, new Color(brightness,brightness/2,100+brightness/2,230));
+			g2.setPaint(gp);
+			g2.fill(new Rectangle(0, separationLineHeight, width, height));
+
+			if (lives <= 3) {
+				backBufferGraphics.setColor(new Color(10, 0,  0, 200 - (lives * 50)));
+				backBufferGraphics.fillRect(0, separationLineHeight, width, height);
+			}
 		}
 	}
 

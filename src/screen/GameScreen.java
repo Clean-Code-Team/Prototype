@@ -507,9 +507,9 @@ public class GameScreen extends Screen {
 	 */
 	private void draw() {
 		drawManager.initDrawing(this);
-		drawManager.drawBackground(this, SEPARATION_LINE_HEIGHT, (int)this.lives);
+		drawManager.drawBackground(this, SEPARATION_LINE_HEIGHT, (int)this.lives, level);
 		if (this.enemyShipSpecial != null) drawManager.drawBackgroundSpecialEnemy(this, SEPARATION_LINE_HEIGHT);
-		drawManager.drawBackgroundLines(this, SEPARATION_LINE_HEIGHT);
+		if (level != 8) drawManager.drawBackgroundLines(this, SEPARATION_LINE_HEIGHT);
 		drawManager.drawBackgroundPlayer(this, SEPARATION_LINE_HEIGHT, this.ship.getPositionX(), this.ship.getPositionY(), this.ship.getWidth(), this.ship.getHeight());
 		drawManager.BulletsCount(this, this.BulletsCount);
 		drawManager.drawEntity(this.ship, this.ship.getPositionX(),

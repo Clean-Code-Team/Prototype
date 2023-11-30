@@ -545,10 +545,10 @@ public class GameScreen_2P extends Screen {
      */
     private void draw() {
         drawManager.initDrawing(this);
-        drawManager.drawBackground(this, SEPARATION_LINE_HEIGHT, (int)this.lives_1p);
-        drawManager.drawBackground(this, SEPARATION_LINE_HEIGHT, (int)this.lives_2p);
+        drawManager.drawBackground(this, SEPARATION_LINE_HEIGHT, (int)this.lives_1p, level);
+        drawManager.drawBackground(this, SEPARATION_LINE_HEIGHT, (int)this.lives_2p, level);
         if (this.enemyShipSpecial != null) drawManager.drawBackgroundSpecialEnemy(this, SEPARATION_LINE_HEIGHT);
-        drawManager.drawBackgroundLines(this, SEPARATION_LINE_HEIGHT);
+        if (level != 8) drawManager.drawBackgroundLines(this, SEPARATION_LINE_HEIGHT);
         drawManager.drawBackgroundPlayer(this, SEPARATION_LINE_HEIGHT, this.ship_1P.getPositionX(), this.ship_1P.getPositionY(), this.ship_1P.getWidth(), this.ship_1P.getHeight());
         drawManager.drawBackgroundPlayer(this, SEPARATION_LINE_HEIGHT, this.ship_2P.getPositionX(), this.ship_2P.getPositionY(), this.ship_2P.getWidth(), this.ship_2P.getHeight());
         drawManager.BulletsCount_1p(this,this.BulletsCount_1p);
