@@ -62,11 +62,23 @@ public class SkinStoreScreen extends Screen {
      }
 
      private void upgradeSkin() {
-        if(score>0){
+        if(score>1000){
             skinColor1 = Color.BLUE;
             skinColor2 = Color.RED;
             skinColor3 = Color.CYAN;
-            skinColor4 = Color.BLACK;
+            skinColor4 = Color.GREEN;
+        }
+        if(score>3000){
+            skinColor1 = Color.RED;
+            skinColor2 = Color.CYAN;
+            skinColor3 = Color.GREEN;
+            skinColor4 = Color.MAGENTA;
+        }
+        if(score>5000){
+            skinColor1 = Color.CYAN;
+            skinColor2 = Color.GREEN;
+            skinColor3 = Color.MAGENTA;
+            skinColor4 = Color.ORANGE;
         }
     }
  
