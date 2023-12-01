@@ -51,10 +51,10 @@ public class Item extends Entity {
     public final void setSprite(double type) {
         if(type < 0.2){ //20%
             this.spriteType = SpriteType.Buff_Item;
-            this.setColor(Color.GREEN);
+            this.setColor(Color.getHSBColor(122,100,99));
         }else if(type < 0.4){ //20%
             this.spriteType = SpriteType.Debuff_Item;
-            this.setColor(Color.GRAY);
+            this.setColor(Color.LIGHT_GRAY);
         }else if(type < 0.5){ //10%
             this.spriteType = SpriteType.BlueEnhanceStone;
             this.setColor(Color.BLUE);
