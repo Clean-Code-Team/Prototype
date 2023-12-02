@@ -25,17 +25,13 @@ class DrawManagerTest {
 
     @Test
     void testDrawGhost() { //448 520
-        BufferedImage backBuffer = new BufferedImage(448, 520, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = backBuffer.createGraphics();
-
         Color testColor = Color.ORANGE;
-        GameState gameState = new GameState(1, 0, new Coin(0, 0), 3, 0, 0, false, testColor, "B U Y", null,null, 99);
-        Color shipColor = gameState.getShipColor();
-        DrawManager.getInstance().ghostPostionX = 50;
-        DrawManager.getInstance().ghostPostionY = 50;
+        GameState gameState = new GameState(1, 0, new Coin(0, 0),
+                3, 0, 0, false, Color.blue,
+                "B U Y", null,null, 99);
         DrawManager.getInstance().drawGhost(false, 0, testColor);
-        int color = backBuffer.getRGB(DrawManager.getInstance().ghostPostionX, DrawManager.getInstance().ghostPostionY);
-        Color ghostColor = new Color(color);
+        Color shipColor = gameState.getShipColor();
+
         assertEquals(testColor, shipColor);
     }
 
