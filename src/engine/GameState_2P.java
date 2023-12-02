@@ -2,6 +2,8 @@ package engine;
 
 import entity.Coin;
 
+import java.awt.*;
+
 /**
  * Implements an object that stores the state of the game between levels.
  *
@@ -30,6 +32,9 @@ public class GameState_2P{
 
     private int BulletsRemaining_1p;
     private int BulletsRemaining_2p;
+
+    private Color shipColor_1p;
+    private Color shipColor_2p;
 
 
 
@@ -65,7 +70,8 @@ public class GameState_2P{
         this.hardcore = hardcore;
         this.BulletsRemaining_1p = BulletsRemaining_1p;
         this.BulletsRemaining_2p = BulletsRemaining_2p;
-
+        this.shipColor_1p = shipColor_1p;
+        this.shipColor_2p = shipColor_2p;
     }
 
     /**
@@ -170,4 +176,22 @@ public class GameState_2P{
             this.livesRemaining_2P = 3;
         }
     }
+
+    /**
+     * @return the color
+
+    public final void setShipColor_1p(Color color) {
+        this.shipColor_1p = Color.CYAN;
+    }
+    public final void setShipColor_2p(Color color) {
+        this.shipColor_2p = Color.MAGENTA;
+    }
+    public final Color getShipColor_1p() {
+        return shipColor_1p;
+    }
+    public final Color getShipColor_2p() {
+        return shipColor_2p;
+    }
+     */
+
 }

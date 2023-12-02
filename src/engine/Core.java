@@ -553,6 +553,8 @@ public final class Core {
                                 gameState_2P.getBulletsShot_2P(),
                                 gameState_2P.getShipsDestroyed(),
                                 gameState_2P.getHardCore(),
+                                //gameState_2P.getShipColor_1p(),
+                                //gameState_2P.getShipColor_2p(),
                                 50, 50);
 
                         // SubMenu | Item Store & Enhancement & Continue & Skin Store

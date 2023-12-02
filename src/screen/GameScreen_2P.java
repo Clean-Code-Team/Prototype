@@ -132,6 +132,9 @@ public class GameScreen_2P extends Screen {
     private int BulletsRemaining_1p;
     private int BulletsRemaining_2p;
 
+    private Color shipColor_1p;
+    private Color shipColor_2p;
+
     /**
      * Constructor, establishes the properties of the screen.
      *
@@ -173,6 +176,9 @@ public class GameScreen_2P extends Screen {
         timer = new CountUpTimer();
         this.BulletsRemaining_1p = gameState.getBulletsRemaining_1p();
         this.BulletsRemaining_2p = gameState.getBulletsRemaining_2p();
+        this.shipColor_1p = Color.CYAN;//gameState.getShipColor_1p();
+        this.shipColor_2p = Color.MAGENTA;//gameState.getShipColor_2p();
+
 
         this.laserActivate = (gameSettings.getDifficulty() == 1 && getGameState().getLevel() >= 4) || (gameSettings.getDifficulty() > 1);
         if (gameSettings.getDifficulty() > 1) {
@@ -190,9 +196,9 @@ public class GameScreen_2P extends Screen {
 
         enemyShipFormation = new EnemyShipFormation(this.gameSettings, 1);
         enemyShipFormation.attach(this);
-        this.ship_1P = new Ship(this.width / 4, this.height - 30, "a", Color.WHITE);
+        this.ship_1P = new Ship(this.width / 4, this.height - 30, "a", shipColor_1p);
         this.bulletLine_1P = new BulletLine(this.width / 4 , this.height + 120);
-        this.ship_2P = new Ship((3 * this.width / 4), this.height - 30, "b", Color.RED);
+        this.ship_2P = new Ship((3 * this.width / 4), this.height - 30, "b", shipColor_2p);
         this.bulletLine_2P = new BulletLine(3 * this.width / 4 , this.height + 120);
         // Appears each 10-30 seconds.
         this.enemyShipSpecialCooldown = Core.getVariableCooldown(
@@ -663,7 +669,7 @@ public class GameScreen_2P extends Screen {
         //GameOver
         drawManager.gameOver_2p(this, this.levelFinished, this.lives_1p, this.lives_2p, this.BulletsCount_1p, this.BulletsCount_2p, this.timer, this.coin, this.clearCoin);
         drawManager.changeGhostColor_2p(this.levelFinished, this.lives_1p, this.lives_2p);
-        drawManager.drawGhost_2p(this.levelFinished, this.lives_1p, this.lives_2p);
+        drawManager.drawGhost_2p(this.levelFinished, this.lives_1p, this.lives_2p, this.shipColor_1p, this.shipColor_2p);
         this.ship_1P.gameEndShipMotion(this.levelFinished, this.lives_1p);
 
         this.ship_2P.gameEndShipMotion(this.levelFinished, this.lives_2p);
