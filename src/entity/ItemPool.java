@@ -30,7 +30,7 @@ public class ItemPool {
             pool.remove(item);
             item.setPositionX(positionX - item.getWidth() / 2);
             item.setPositionY(positionY);
-            item.setSprite();
+            item.setSprite(Math.random());
             item.CoolReset();
             item.setDestroy(false);
         } else {

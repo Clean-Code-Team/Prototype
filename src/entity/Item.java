@@ -39,22 +39,22 @@ public class Item extends Entity {
         this.livingTime.reset();
         item_dx = Math.random() > 0.5 ? 1 : -1;
         item_dy = Math.random() > 0.5 ? 1 : -1;
-        this.setSprite();
+        this.setSprite(Math.random());
         isdetroyed = false;
         this.destructionCooldown = Core.getCooldown(200);
     }
 
+
     /**
      * Set Sprite dot image.
      */
-    public void setSprite() {
-        double type = Math.random();
+    public final void setSprite(double type) {
         if(type < 0.2){ //20%
             this.spriteType = SpriteType.Buff_Item;
-            this.setColor(Color.GREEN);
+            this.setColor(Color.getHSBColor(122,100,99));
         }else if(type < 0.4){ //20%
             this.spriteType = SpriteType.Debuff_Item;
-            this.setColor(Color.GRAY);
+            this.setColor(Color.LIGHT_GRAY);
         }else if(type < 0.5){ //10%
             this.spriteType = SpriteType.BlueEnhanceStone;
             this.setColor(Color.BLUE);
