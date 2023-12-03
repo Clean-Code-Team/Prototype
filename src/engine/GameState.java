@@ -3,6 +3,7 @@ package engine;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import entity.Coin;
 
@@ -205,4 +206,12 @@ public class GameState {
 	public final int getBulletsRemaining() {
 		return BulletsRemaining;
 	}
+	public Color getPlayerColor(){
+		Random r = new Random();
+		Color color = new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255));
+		if(!(color.equals(Color.YELLOW) || color.equals(Color.BLUE) || color.equals(Color.RED) || color.equals(Color.CYAN)))
+			return color;
+		return getPlayerColor();
+	}
+	public void setPlayerColor(){this.shipColor = getPlayerColor();}
 }

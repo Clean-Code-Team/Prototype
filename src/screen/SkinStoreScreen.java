@@ -28,11 +28,12 @@ public class SkinStoreScreen extends Screen {
     private SkinBuyManager skinBuyManager;
 
     private int skinPrice = 200;
+    private int score;
 
-    private Color skinColor1 = Color.YELLOW;
-    private Color skinColor2 = Color.BLUE;
-    private Color skinColor3 = Color.RED;
-    private Color skinColor4 = Color.CYAN;
+    public static Color skinColor1 = Color.YELLOW;
+    public static Color skinColor2 = Color.BLUE;
+    public static Color skinColor3 = Color.RED;
+    public static Color skinColor4 = Color.CYAN;
  
      /**
       * Constructor, establishes the properties of the screen.
@@ -52,11 +53,34 @@ public class SkinStoreScreen extends Screen {
          this.selectionCooldown = Core.getCooldown(SELECTION_TIME);
          this.selectionCooldown.reset();
          this.coin = gameState.getCoin();
+         this.score = gameState.getScore();
          this.gameState = gameState;
          this.enhanceManager = enhanceManager;
          soundEffect = new SoundEffect();
          this.skinBuyManager = new SkinBuyManager(gameState);
+
      }
+     // upgrade new skin in skinstorescreen
+     private void upgradeSkin() {
+        if(score>5000){
+            skinColor1 = Color.CYAN;
+            skinColor2 = Color.GREEN;
+            skinColor3 = Color.MAGENTA;
+            skinColor4 = Color.ORANGE;
+        }
+        else if(score>3000){
+            skinColor1 = Color.RED;
+            skinColor2 = Color.CYAN;
+            skinColor3 = Color.GREEN;
+            skinColor4 = Color.MAGENTA;
+        }
+        else if(score>1000){
+            skinColor1 = Color.BLUE;
+            skinColor2 = Color.RED;
+            skinColor3 = Color.CYAN;
+            skinColor4 = Color.GREEN;
+        }
+    }
  
      /**
       * Starts the action.
@@ -65,7 +89,7 @@ public class SkinStoreScreen extends Screen {
       */
      public final int run() {
          super.run();
- 
+
          return this.returnCode;
      }
  
@@ -74,6 +98,7 @@ public class SkinStoreScreen extends Screen {
       */
      protected final void update() {
          super.update();
+         upgradeSkin();
  
          draw();
         if (this.selectionCooldown.checkFinished()
@@ -105,14 +130,14 @@ public class SkinStoreScreen extends Screen {
             if (inputManager.isKeyDown(KeyEvent.VK_SPACE)) {
                 soundEffect.playSpaceButtonSound();
                 if (returnCode == 86){
-                    if(skinBuyManager.isSkinOwned(Color.YELLOW)){
-                        if(skinBuyManager.isSkinEquipped(Color.YELLOW)){
-                            skinBuyManager.unequipSkin(Color.YELLOW);
+                    if(skinBuyManager.isSkinOwned(skinColor1)){
+                        if(skinBuyManager.isSkinEquipped(skinColor1)){
+                            skinBuyManager.unequipSkin(skinColor1);
                         }
                         else{
-                            skinBuyManager.equipSkin(Color.YELLOW);
+                            skinBuyManager.equipSkin(skinColor1);
                         }
-                    } else if (!(skinBuyManager.isSkinOwned(Color.YELLOW))){
+                    } else if (!(skinBuyManager.isSkinOwned(skinColor1))){
                         if (this.coin.getCoin() >= skinPrice) {
                             skinBuyManager.purchaseSkin(skinColor1, skinPrice);
                             skinBuyManager.equipSkin(skinColor1);
